@@ -290,13 +290,13 @@
     $("#cupsValue").textContent = cups;
     var r = calcRecommend(cups);
     $("#calcResult").innerHTML =
-      '<h4>Рекомендуемый тариф</h4>' +
-      '<p>Вариант: <b>' + r.name + '</b></p>' +
-      '<p>Объём кофе: <b>' + r.kg + ' кг/мес</b> (≈ ' + (r.kg * 100) + ' чашек)</p>' +
-      '<p>Для <b>' + r.cups + ' чашек</b> в день при 22 рабочих днях</p>' +
-      '<div class="r-price">≈ ' + r.price.toLocaleString("ru-RU") + ' ₽ / мес</div>' +
-      '<p>Себестоимость чашки ≈ <b>' + r.perCup + ' ₽</b></p>' +
-      '<a class="btn btn--accent btn--sm calc__btn" href="#order">Выбрать этот тариф</a>';
+      '<p class="calc__label">Рекомендуемый тариф</p>' +
+      '<h4>' + r.name + '</h4>' +
+      '<div class="calc__price">≈ ' + r.price.toLocaleString("ru-RU") + ' ₽<span> / мес</span></div>' +
+      '<p class="calc__row">Объём кофе: <b>' + r.kg + ' кг/мес</b> (≈ ' + (r.kg * 100) + ' чашек)</p>' +
+      '<p class="calc__row">Для <b>' + r.cups + ' чашек</b> в день при 22 рабочих днях</p>' +
+      '<p class="calc__row">Себестоимость чашки ≈ <b>' + r.perCup + ' ₽</b></p>' +
+      '<a class="btn btn--accent calc__btn" href="#order">Выбрать этот тариф</a>';
   }
 
   /* ---------- header / nav / mobile ---------- */
