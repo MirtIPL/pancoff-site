@@ -312,6 +312,45 @@ button { touch-action: manipulation; }
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity .55s ease, transform .55s ease; }
 .reveal.in { opacity: 1; transform: none; }
 
+/* ---------- SEO pages ---------- */
+.pagehead { background: radial-gradient(1200px 500px at 80% -10%, #3E2A20 0%, var(--coffee-900) 60%, var(--coffee-800) 100%); color: var(--cream); padding: 48px 0 56px; }
+.pagehead__title { font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -.5px; max-width: 780px; }
+.pagehead__sub { color: #DCCBB6; font-size: 16.5px; max-width: 660px; margin: 16px 0 0; }
+.pagehead__actions { margin-top: 28px; }
+
+.breadcrumb { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; color: #C9B499; margin-bottom: 18px; }
+.breadcrumb a { color: var(--accent-3); }
+.breadcrumb a:hover { text-decoration: underline; }
+
+.prose p { margin: 0 0 16px; font-size: 16px; color: var(--brown); }
+.prose { max-width: 860px; margin: 0 auto 34px; }
+
+.checklist--2col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; max-width: 860px; margin: 0 auto; }
+.checklist--2col li { color: var(--brown); }
+
+.grid--2 { grid-template-columns: repeat(2, 1fr); }
+.grid--3 { grid-template-columns: repeat(3, 1fr); }
+
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.step { background: var(--white); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); border-top: 3px solid var(--accent); }
+.step__num { font-size: 12px; font-weight: 800; color: var(--accent); letter-spacing: 1.2px; text-transform: uppercase; }
+.step h3 { font-size: 17px; color: var(--coffee-900); margin: 10px 0 6px; }
+.step p { margin: 0; font-size: 14px; color: var(--muted); }
+
+.center-cta { margin-top: 30px; text-align: center; }
+.btn--ghost-dark { border-color: rgba(46, 27, 15, .35); color: var(--brown-2); }
+.btn--ghost-dark:hover { background: rgba(192, 133, 82, .12); }
+
+.calc-cta { text-align: center; }
+
+.faq { max-width: 860px; margin: 0 auto; }
+.faq details { background: var(--white); border: 1px solid rgba(46, 27, 15, .08); border-radius: var(--radius-sm); margin-bottom: 12px; box-shadow: var(--shadow); overflow: hidden; }
+.faq summary { cursor: pointer; padding: 18px 22px; font-weight: 700; font-size: 15.5px; color: var(--coffee-900); list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 14px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; flex: none; font-size: 22px; line-height: 1; color: var(--accent); transition: transform .2s ease; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { margin: 0; padding: 0 22px 18px; font-size: 14.5px; color: var(--muted); }
+
 /* ---------- responsive ---------- */
 @media (max-width: 1100px) {
   .catalog { grid-template-columns: repeat(2, 1fr); }
@@ -330,6 +369,9 @@ button { touch-action: manipulation; }
   .coffee { grid-template-columns: repeat(2, 1fr); }
   .reviews { grid-template-columns: repeat(2, 1fr); }
   .footer__grid { grid-template-columns: repeat(2, 1fr); }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+  .grid--3 { grid-template-columns: repeat(2, 1fr); }
+  .grid--2 { grid-template-columns: 1fr; }
 
   .nav {
     position: fixed; top: 0; right: 0; bottom: 0; left: auto;
@@ -363,12 +405,14 @@ button { touch-action: manipulation; }
   .office { gap: 28px; }
   .service { gap: 30px; }
   .order { gap: 30px; }
+  .checklist--2col { grid-template-columns: 1fr; }
+  .pagehead { padding: 36px 0 44px; }
 }
 
 @media (max-width: 600px) {
   .section { padding: 48px 0; }
   .topbar__item:not(.topbar__phones) { display: none; }
-  .grid--4, .catalog, .catalog--sale, .coffee, .reviews, .service__cols { grid-template-columns: 1fr; }
+  .grid--4, .catalog, .catalog--sale, .coffee, .reviews, .service__cols, .steps, .grid--3 { grid-template-columns: 1fr; }
   .footer__grid { grid-template-columns: 1fr; gap: 26px; padding-bottom: 30px; }
   .section__title { font-size: 26px; }
   .section__lead { font-size: 15.5px; margin-bottom: 28px; }

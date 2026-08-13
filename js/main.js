@@ -131,13 +131,15 @@
   function el(html) { var t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstChild; }
 
   function renderAdvantages() {
-    $("#advantagesGrid").innerHTML = advantages.map(function (a) {
+    var root = $("#advantagesGrid"); if (!root) return;
+    root.innerHTML = advantages.map(function (a) {
       return '<div class="card reveal"><div class="card__icon">' + a.icon + '</div><h3>' + a.title + '</h3><p>' + a.text + '</p></div>';
     }).join("");
   }
 
   function renderPackages() {
-    $("#packagesGrid").innerHTML = packages.map(function (p) {
+    var root = $("#packagesGrid"); if (!root) return;
+    root.innerHTML = packages.map(function (p) {
       return '<div class="package reveal' + (p.hot ? " package--hot" : "") + '">' +
         '<span class="package__tag">' + p.tag + '</span>' +
         '<h3>' + p.name + '</h3>' +
@@ -148,7 +150,8 @@
         '</div>';
     }).join("");
 
-    $("#packagesNote").innerHTML =
+    var note = $("#packagesNote");
+    if (note) note.innerHTML =
       '<b>Всё включено бесплатно:</b> установка и наладка · обучение и инструктаж · доставка кофе · ежемесячное сервисное обслуживание · замена кофемашины при поломке · персональный менеджер. <b>Аренда — при закупке кофе от 2 кг в месяц.</b>';
   }
 
@@ -166,7 +169,8 @@
   }
 
   function renderCatalog() {
-    $("#catalogGrid").innerHTML = catalog.map(function (m, i) {
+    var root = $("#catalogGrid"); if (!root) return;
+    root.innerHTML = catalog.map(function (m, i) {
       return '<div class="item reveal">' +
         itemPhoto(m, i) +
         '<div class="item__body">' +
@@ -183,11 +187,12 @@
   }
 
   function renderSale() {
+    var tabsEl = $("#saleTabs"); if (!tabsEl) return;
     var tabs = Object.keys(sale);
     var tabsHtml = tabs.map(function (t, i) {
       return '<button class="tab' + (i === 0 ? " active" : "") + '" data-tab="' + t + '" role="tab">' + t + '</button>';
     }).join("");
-    $("#saleTabs").innerHTML = tabsHtml;
+    tabsEl.innerHTML = tabsHtml;
 
     function grid(name) {
       return sale[name].map(function (m, i) {
@@ -206,7 +211,7 @@
     $("#saleGrid").innerHTML = grid(tabs[0]);
     bindPhotoFallback($("#saleGrid"));
 
-    $("#saleTabs").addEventListener("click", function (e) {
+    tabsEl.addEventListener("click", function (e) {
       var btn = e.target.closest(".tab");
       if (!btn) return;
       this.querySelectorAll(".tab").forEach(function (t) { t.classList.remove("active"); });
@@ -218,7 +223,8 @@
   }
 
   function renderCoffee() {
-    $("#coffeeGrid").innerHTML = coffees.map(function (c) {
+    var root = $("#coffeeGrid"); if (!root) return;
+    root.innerHTML = coffees.map(function (c) {
       return '<div class="coffee__card reveal">' +
         '<div class="coffee__roast coffee__roast--' + c.cls + '">' + c.roast + '</div>' +
         '<h3>' + c.name + '</h3><p>' + c.text + '</p></div>';
@@ -226,10 +232,12 @@
   }
 
   function renderService() {
-    $("#serviceCols").innerHTML = service.map(function (s) {
+    var cols = $("#serviceCols"); if (!cols) return;
+    cols.innerHTML = service.map(function (s) {
       return '<div class="srv-card"><b>' + s.title + '</b><p>' + s.items.join(" · ") + '</p></div>';
     }).join("");
-    $("#serviceList").innerHTML = [
+    var list = $("#serviceList");
+    if (list) list.innerHTML = [
       "Бесплатный ремонт и диагностика при регулярной закупке кофе",
       "Ежемесячная профилактика и чистка кофемашины",
       "Доставка кофе по Санкт-Петербургу и Лен. области",
@@ -239,7 +247,8 @@
   }
 
   function renderReviews() {
-    $("#reviewsGrid").innerHTML = reviews.map(function (r) {
+    var root = $("#reviewsGrid"); if (!root) return;
+    root.innerHTML = reviews.map(function (r) {
       return '<div class="review reveal">' +
         '<div class="review__stars">★★★★★</div>' +
         '<p>«' + r.text + '»</p>' +
@@ -249,7 +258,8 @@
   }
 
   function renderOffice() {
-    $("#officeChecklist").innerHTML = officePoints.map(function (p) { return "<li>" + p + "</li>"; }).join("");
+    var root = $("#officeChecklist"); if (!root) return;
+    root.innerHTML = officePoints.map(function (p) { return "<li>" + p + "</li>"; }).join("");
   }
 
   /* ---------- calculator ---------- */
@@ -266,7 +276,8 @@
   }
 
   function renderCalc() {
-    var cups = parseInt($("#cups").value, 10);
+    var slider = $("#cups"); if (!slider) return;
+    var cups = parseInt(slider.value, 10);
     $("#cupsValue").textContent = cups;
     var r = calcRecommend(cups);
     $("#calcResult").innerHTML =
@@ -383,7 +394,8 @@
     renderReviews();
     renderOffice();
     renderCalc();
-    $("#cups").addEventListener("input", renderCalc);
+    var cups = $("#cups");
+    if (cups) cups.addEventListener("input", renderCalc);
     observeReveals();
   });
 })();
