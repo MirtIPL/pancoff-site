@@ -281,7 +281,7 @@
     var kg = Math.max(2, Math.ceil((cups * 22) / 300));
     var price = kg <= 3 ? 4500 : (kg <= 5 ? 7500 : (kg <= 10 ? 14000 : 23250));
     var perCup = Math.round(price / (cups * 22));
-    return { name: rec.name, machine: rec.machine, kg: kg, price: price, perCup: perCup, cups: cups };
+    return { name: rec.name, kg: kg, price: price, perCup: perCup, cups: cups };
   }
 
   function renderCalc() {
@@ -290,16 +290,13 @@
     $("#cupsValue").textContent = cups;
     var r = calcRecommend(cups);
     $("#calcResult").innerHTML =
-      '<span class="calc__tag">Рекомендуемый тариф</span>' +
-      '<h4>' + r.name + '</h4>' +
-      '<p class="calc__machine">' + r.machine + '</p>' +
-      '<div class="calc__chips">' +
-      '  <span class="chip">' + r.kg + ' кг кофе/мес</span>' +
-      '  <span class="chip">≈ ' + (r.kg * 100) + ' чашек/мес</span>' +
-      '</div>' +
-      '<div class="r-price">≈ ' + r.price.toLocaleString("ru-RU") + ' ₽<span> / мес</span></div>' +
-      '<p class="calc__cup">Себестоимость чашки ≈ <b>' + r.perCup + ' ₽</b> при ' + r.cups + ' чашках в день</p>' +
-      '<a class="btn btn--accent calc__btn" href="#order">Выбрать этот тариф</a>';
+      '<h4>Рекомендуемый тариф</h4>' +
+      '<p>Вариант: <b>' + r.name + '</b></p>' +
+      '<p>Объём кофе: <b>' + r.kg + ' кг/мес</b> (≈ ' + (r.kg * 100) + ' чашек)</p>' +
+      '<p>Для <b>' + r.cups + ' чашек</b> в день при 22 рабочих днях</p>' +
+      '<div class="r-price">≈ ' + r.price.toLocaleString("ru-RU") + ' ₽ / мес</div>' +
+      '<p>Себестоимость чашки ≈ <b>' + r.perCup + ' ₽</b></p>' +
+      '<a class="btn btn--accent btn--sm calc__btn" href="#order">Выбрать этот тариф</a>';
   }
 
   /* ---------- header / nav / mobile ---------- */
