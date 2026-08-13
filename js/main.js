@@ -283,8 +283,10 @@
   var header = $("#header");
   var nav = $("#nav");
   var burger = $("#burger");
+  var navBackdrop = $("#navBackdrop");
   function setNav(open) {
     nav.classList.toggle("open", open);
+    if (navBackdrop) navBackdrop.classList.toggle("open", open);
     burger.classList.toggle("open", open);
     burger.setAttribute("aria-expanded", open ? "true" : "false");
     document.body.style.overflow = open ? "hidden" : "";
@@ -292,8 +294,9 @@
   burger.addEventListener("click", function () {
     setNav(!nav.classList.contains("open"));
   });
+  if (navBackdrop) navBackdrop.addEventListener("click", function () { setNav(false); });
   nav.addEventListener("click", function (e) {
-    if (e.target.closest(".nav__link")) setNav(false);
+    if (e.target.closest("a")) setNav(false);
   });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && nav.classList.contains("open")) setNav(false);
@@ -301,6 +304,9 @@
   window.addEventListener("scroll", function () {
     header.classList.toggle("scrolled", window.scrollY > 10);
   }, { passive: true });
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 1024 && nav.classList.contains("open")) setNav(false);
+  });
 
   /* ---------- reveal ---------- */
   var io = "IntersectionObserver" in window ? new IntersectionObserver(function (entries) {
