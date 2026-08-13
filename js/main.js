@@ -2,6 +2,15 @@
 (function () {
   "use strict";
 
+  var BASE = (function () {
+    var src = document.currentScript && document.currentScript.src;
+    if (src) {
+      var i = src.lastIndexOf("/js/main.js");
+      if (i > 0) return src.slice(0, i + 1);
+    }
+    return "";
+  })();
+
   var MACHINE_BG = [
     ["#4E342E", "#241915", "#C08552"],
     ["#5D4A3A", "#2A1B14", "#D9A05B"],
@@ -158,7 +167,7 @@
   function itemPhoto(m, i) {
     return '<div class="item__img">' +
       '<div class="item__img-svg">' + machineSvg(i) + '</div>' +
-      '<img class="item__img-photo" src="' + m.img + '" alt="' + m.brand + ' ' + m.name + '" loading="lazy">' +
+      '<img class="item__img-photo" src="' + BASE + m.img + '" alt="' + m.brand + ' ' + m.name + '" loading="lazy">' +
       '</div>';
   }
 
