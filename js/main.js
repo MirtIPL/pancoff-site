@@ -99,7 +99,7 @@
       ["F 531-102 Caffeo Passione OT", "images/sale/melitta-531-102.png"], ["F 530-101 Caffeo Passione", "images/sale/melitta-530-101.png"],
       ["F 530-102 Caffeo Passione", "images/sale/melitta-530-102.png"], ["957-101 Caffeo Solo & Perfect Milk", "images/sale/melitta-957-101.png"],
       ["957-103 Caffeo Solo & Perfect Milk", "images/sale/melitta-957-103.png"], ["953-102 Caffeo Solo & Milk", "images/sale/melitta-953-102.png"],
-      ["E 950-101", "images/sale/melitta-950-101.png"], ["E 950-103", "images/sale/melitta-950-103.png"]
+      ["E 950-103 Caffeo Solo & Milk", "images/sale/melitta-950-103.png"]
     ],
     "Nivona": [
       ["Nivona CafeRomatica 520", "images/sale/nivona-520.png"], ["Nivona CafeRomatica 530", "images/sale/nivona-530.png"],
