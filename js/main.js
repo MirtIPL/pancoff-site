@@ -59,7 +59,6 @@
   ];
 
   var catalog = [
-    { brand: "Melitta", name: "E 950-103 Caffeo SOLO", img: "images/rent/melitta-950-103.png", desc: "Идеальна для эспрессо и американо. Простая и надёжная классика для небольшого офиса.", drinks: ["Эспрессо", "Американо"], rent: "от 3 кг кофе", price: "6 000 ₽ / 3 кг" },
     { brand: "Sate", name: "CT-100", img: "images/rent/sate-ct-100.png", desc: "Автоматическая кофемашина с автокапучинатором. Готовит капучино и латте в одно нажатие.", drinks: ["Эспрессо", "Американо", "Капучино", "Латте"], rent: "от 3 кг кофе", price: "6 200 ₽ / 3 кг" },
     { brand: "Sate", name: "CT-200", img: "images/rent/sate-ct-200.png", desc: "Старшая модель Sate с большей производительностью и увеличенным резервуаром.", drinks: ["Эспрессо", "Американо", "Капучино", "Латте"], rent: "от 5 кг кофе", price: "9 500 ₽ / 5 кг" },
     { brand: "Rooma", name: "RM-A9 PBT Black", img: "images/rent/rooma-rm-a9.png", desc: "Автомат с автокапучинатором в чёрном корпусе. Хороший баланс цены и функциональности.", drinks: ["Эспрессо", "Американо", "Капучино", "Латте"], rent: "от 4 кг кофе", price: "8 000 ₽ / 4 кг" },
@@ -77,8 +76,7 @@
       ["F 630-102 CI Touch", "images/sale/melitta-630-102.png"], ["F 531-101 Caffeo Passione OT", "images/sale/melitta-531-101.png"],
       ["F 531-102 Caffeo Passione OT", "images/sale/melitta-531-102.png"], ["F 530-101 Caffeo Passione", "images/sale/melitta-530-101.png"],
       ["F 530-102 Caffeo Passione", "images/sale/melitta-530-102.png"], ["957-101 Caffeo Solo & Perfect Milk", "images/sale/melitta-957-101.png"],
-      ["957-103 Caffeo Solo & Perfect Milk", "images/sale/melitta-957-103.png"], ["953-102 Caffeo Solo & Milk", "images/sale/melitta-953-102.png"],
-      ["E 950-103 Caffeo Solo & Milk", "images/sale/melitta-950-103.png"]
+      ["957-103 Caffeo Solo & Perfect Milk", "images/sale/melitta-957-103.png"], ["953-102 Caffeo Solo & Milk", "images/sale/melitta-953-102.png"]
     ],
     "Nivona": [
       ["Nivona CafeRomatica 520", "images/sale/nivona-520.png"], ["Nivona CafeRomatica 530", "images/sale/nivona-530.png"],
