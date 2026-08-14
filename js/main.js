@@ -11,7 +11,7 @@
     return "";
   })();
 
-  var FORM_EMAIL = "wowowa3903@playboot.com"; // куда доставляются заявки (FormSubmit)
+  var FORM_EMAIL = "pancoff-spb@mail.ru"; // куда доставляются заявки (FormSubmit)
 
   /* ---------- data ---------- */
   var advantages = [
