@@ -137,31 +137,61 @@
         <div class="hero__art" aria-hidden="true">
           <svg viewBox="0 0 420 420" width="420" height="420">
             <defs>
-              <linearGradient id="steam" x1="0" y1="1" x2="0" y2="0">
+              <linearGradient id="steamA" x1="0" y1="1" x2="0" y2="0">
                 <stop offset="0" stop-color="#C08552" stop-opacity="0"/>
                 <stop offset="1" stop-color="#E8D5BE"/>
               </linearGradient>
-              <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+              <linearGradient id="bodyA" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0" stop-color="#4E342E"/>
                 <stop offset="1" stop-color="#2A1B14"/>
               </linearGradient>
             </defs>
-            <g class="steam">
-              <path d="M180 96c-16 12-16 28 0 40s16 28 0 40" fill="none" stroke="url(#steam)" stroke-width="8" stroke-linecap="round"/>
-              <path d="M210 82c-16 12-16 28 0 40s16 28 0 40" fill="none" stroke="url(#steam)" stroke-width="8" stroke-linecap="round"/>
-              <path d="M240 96c-16 12-16 28 0 40s16 28 0 40" fill="none" stroke="url(#steam)" stroke-width="8" stroke-linecap="round"/>
-            </g>
+
+            <circle cx="210" cy="216" r="152" fill="#F3E9DA"/>
+            <circle cx="210" cy="216" r="126" fill="none" stroke="#E8D5BE" stroke-width="2.5" stroke-dasharray="3 10" stroke-linecap="round"/>
+            <circle cx="210" cy="216" r="126" fill="none" stroke="#D9A05B" stroke-width="1" opacity=".35" stroke-dasharray="2 26" stroke-linecap="round"/>
+
+            <ellipse cx="210" cy="352" rx="118" ry="19" fill="#1d110b" opacity=".18"/>
+
             <g>
-              <ellipse cx="210" cy="350" rx="130" ry="26" fill="#1d110b" opacity=".22"/>
-              <rect x="110" y="140" width="200" height="190" rx="30" fill="url(#body)"/>
-              <rect x="110" y="140" width="200" height="26" rx="13" fill="#8a5a34"/>
-              <path d="M310 196h28a26 26 0 0 1 0 52h-28" fill="none" stroke="#8a5a34" stroke-width="15" stroke-linecap="round"/>
-              <rect class="cup-fill" x="130" y="182" width="160" height="132" rx="12" fill="#B47B4F"/>
-              <rect x="110" y="330" width="200" height="4" rx="2" fill="#6b4527" opacity=".55"/>
-              <g class="bean-drop">
-                <ellipse cx="210" cy="120" rx="7" ry="9.5" fill="#3A240F" transform="rotate(28 210 120)"/>
-                <path d="M210 113c-1.5 3.4 1.5 5.8 1.5 8.6" stroke="#C08552" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-              </g>
+              <rect x="163" y="116" width="94" height="36" rx="12" fill="#3E2A20"/>
+              <path d="M173 152l10-36h54l10 36z" fill="#241915"/>
+              <ellipse cx="210" cy="116" rx="47" ry="6" fill="#1d110b" opacity=".35"/>
+              <ellipse cx="204" cy="128" rx="7" ry="4" fill="#4E342E"/>
+              <ellipse cx="222" cy="122" rx="6" ry="4" fill="#4E342E"/>
+              <ellipse cx="192" cy="120" rx="5" ry="3.5" fill="#4E342E" opacity=".8"/>
+
+              <rect x="120" y="152" width="180" height="188" rx="28" fill="url(#bodyA)"/>
+              <rect x="120" y="152" width="180" height="26" rx="13" fill="#8a5a34"/>
+              <rect x="132" y="192" width="14" height="116" rx="7" fill="#ffffff" opacity=".05"/>
+
+              <rect x="140" y="192" width="140" height="54" rx="12" fill="#241915"/>
+              <rect x="150" y="202" width="120" height="34" rx="7" fill="#2F211A"/>
+              <rect x="158" y="211" width="76" height="5" rx="2.5" fill="#D9A05B"/>
+              <rect x="158" y="223" width="52" height="5" rx="2.5" fill="#D9A05B" opacity=".55"/>
+
+              <circle cx="160" cy="266" r="6" fill="#C08552"/>
+              <circle cx="180" cy="266" r="6" fill="#C08552" opacity=".6"/>
+              <circle cx="200" cy="266" r="6" fill="#C08552" opacity=".35"/>
+              <rect x="222" y="259" width="36" height="14" rx="7" fill="#8a5a34"/>
+
+              <rect x="120" y="316" width="180" height="16" rx="8" fill="#3E2A20"/>
+              <rect x="130" y="318" width="160" height="2" rx="1" fill="#1d110b" opacity=".35"/>
+              <rect x="130" y="326" width="160" height="2" rx="1" fill="#1d110b" opacity=".35"/>
+            </g>
+
+            <g class="steam">
+              <path d="M210 104c-14 11-14 25 0 36s14 25 0 36" fill="none" stroke="url(#steamA)" stroke-width="7" stroke-linecap="round"/>
+              <path d="M192 108c-11 9-11 20 0 29s11 20 0 29" fill="none" stroke="url(#steamA)" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+              <path d="M228 108c-11 9-11 20 0 29s11 20 0 29" fill="none" stroke="url(#steamA)" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+            </g>
+
+            <g>
+              <ellipse cx="210" cy="338" rx="52" ry="11" fill="#E8D5BE"/>
+              <ellipse cx="210" cy="338" rx="30" ry="6" fill="#C08552" opacity=".28"/>
+              <path d="M184 286h52v32a16 16 0 0 1-16 16h-20a16 16 0 0 1-16-16z" fill="#FBF6EF"/>
+              <rect class="cup-fill" x="188" y="290" width="44" height="36" rx="7" fill="#6b4527"/>
+              <path d="M236 296h11a9 9 0 0 1 0 18h-11" fill="none" stroke="#FBF6EF" stroke-width="7" stroke-linecap="round"/>
             </g>
           </svg>
         </div>

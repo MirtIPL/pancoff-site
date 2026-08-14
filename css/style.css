@@ -176,15 +176,6 @@ a:focus-visible { outline: 2px solid var(--accent-3); outline-offset: 2px; }
 @keyframes rise { 0%, 100% { transform: translateY(0) scaleY(1); opacity: .5; } 50% { transform: translateY(-16px) scaleY(1.15); opacity: .9; } }
 .cup-fill { transform-box: fill-box; transform-origin: center bottom; animation: fillCup 3.6s ease-in-out infinite alternate; }
 @keyframes fillCup { 0% { transform: scaleY(.16); opacity: .75; } 100% { transform: scaleY(1); opacity: 1; } }
-.bean-drop { transform-box: fill-box; animation: beanDrop 3.6s ease-in-out infinite; }
-.bean-drop ellipse { animation: beanSpin 3.6s ease-in-out infinite; transform-origin: center; }
-@keyframes beanDrop {
-  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0; }
-  12% { opacity: 1; }
-  55% { transform: translateY(62px) rotate(200deg); opacity: 1; }
-  70%, 100% { transform: translateY(62px) rotate(200deg); opacity: 0; }
-}
-@keyframes beanSpin { 0% { transform: rotate(28deg); } 55%, 100% { transform: rotate(388deg); } }
 
 /* ---------- sections ---------- */
 .section { padding: 76px 0; }
