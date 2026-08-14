@@ -411,9 +411,14 @@
     var subject = form.querySelector('[name="subject"]');
     if (subject) {
       var s = btn.getAttribute("data-subject") || "";
-      [].forEach.call(subject.options, function (o) {
-        if (s && o.text && o.text.toLowerCase().indexOf(s.toLowerCase()) !== -1) subject.value = o.value;
-      });
+      if (s) {
+        for (var i = 0; i < subject.options.length; i++) {
+          if (subject.options[i].text && subject.options[i].text.toLowerCase().indexOf(s.toLowerCase()) !== -1) {
+            subject.value = subject.options[i].value;
+            break;
+          }
+        }
+      }
     }
     msg.value = text;
   }
