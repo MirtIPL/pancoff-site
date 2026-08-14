@@ -127,12 +127,21 @@
     var root = $("#packagesGrid"); if (!root) return;
     root.innerHTML = packages.map(function (p) {
       return '<div class="package reveal' + (p.hot ? " package--hot" : "") + '">' +
+        (p.hot ? '<span class="package__ribbon">Хит продаж</span>' : "") +
         '<span class="package__tag">' + p.tag + '</span>' +
         '<h3>' + p.name + '</h3>' +
         '<div class="package__machine">' + p.machine + '</div>' +
+        '<div class="package__specs">' +
         p.spec.map(function (s) { return '<div class="package__spec"><span>' + s[0] + '</span><b>' + s[1] + '</b></div>'; }).join("") +
-        '<div class="package__price"><b>' + p.price + ' / месяц</b><span>' + p.note + '</span></div>' +
-        '<a class="btn btn--accent" href="#order" data-order data-tpl="package" data-subject="Аренда кофемашины" data-tariff="' + p.tag + '" data-machine="' + p.name + '" data-price="' + p.price + '" data-cups="' + p.spec[1][1] + '" data-coffee="' + p.spec[2][1] + '">Оставить заявку</a>' +
+        '</div>' +
+        '<div class="package__price"><b>' + p.price + '</b><span>/ месяц</span></div>' +
+        '<span class="package__cup">' + p.note + '</span>' +
+        '<div class="package__perks">' +
+        '<span class="package__perk">Установка 0 ₽</span>' +
+        '<span class="package__perk">Сервис включён</span>' +
+        '<span class="package__perk">Замена при поломке</span>' +
+        '</div>' +
+        '<a class="btn btn--accent" href="#order" data-order data-tpl="package" data-subject="Аренда кофемашины" data-tariff="' + p.tag + '" data-machine="' + p.name + '" data-price="' + p.price + '" data-cups="' + p.spec[1][1] + '" data-coffee="' + p.spec[2][1] + '">Выбрать тариф</a>' +
         '</div>';
     }).join("");
 
