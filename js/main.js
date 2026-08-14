@@ -134,7 +134,7 @@
         '<div class="package__machine">' + p.machine + '</div>' +
         p.spec.map(function (s) { return '<div class="package__spec"><span>' + s[0] + '</span><b>' + s[1] + '</b></div>'; }).join("") +
         '<div class="package__price"><b>' + p.price + ' / месяц</b><span>' + p.note + '</span></div>' +
-        '<a class="btn btn--accent" href="#order">Оставить заявку</a>' +
+        '<a class="btn btn--accent" href="#order" data-package-order data-pkg-name="' + p.name + '" data-pkg-cups="' + p.spec[1][1] + '" data-pkg-coffee="' + p.spec[2][1] + '" data-pkg-price="' + p.price + '">Оставить заявку</a>' +
         '</div>';
     }).join("");
 
@@ -358,8 +358,8 @@
     var submitBtn = form.querySelector("button[type='submit']");
     if (submitBtn) submitBtn.addEventListener("click", handleOrderSubmit);
     document.addEventListener("click", function (e) {
-      var btn = e.target && e.target.closest ? e.target.closest("[data-calc-order]") : null;
-      if (!btn || !lastCalc) return;
+      var btn = e.target && e.target.closest ? e.target.closest("[data-calc-order], [data-package-order]") : null;
+      if (!btn) return;
       var subject = form.querySelector('[name="subject"]');
       if (subject) {
         [].forEach.call(subject.options, function (o) {
@@ -367,12 +367,20 @@
         });
       }
       var msg = form.querySelector('[name="message"]');
-      if (msg) {
+      if (!msg) return;
+      if (btn.hasAttribute("data-calc-order")) {
+        if (!lastCalc) return;
         msg.value =
           "Рекомендуемый тариф: " + lastCalc.name + "\n" +
           "Количество чашек в день: " + lastCalc.cups + "\n" +
           "Планируемый объём кофе: " + lastCalc.kg + " кг/мес (≈ " + (lastCalc.kg * 100) + " чашек)\n" +
           "Себестоимость чашки: ≈ " + lastCalc.perCup + " ₽\n\n" +
+          "Прошу рассчитать аренду и подобрать кофемашину.";
+      } else {
+        msg.value =
+          "Тариф: " + btn.getAttribute("data-pkg-name") + " · " + btn.getAttribute("data-pkg-price") + "/мес\n" +
+          "Количество чашек в день: " + btn.getAttribute("data-pkg-cups") + "\n" +
+          "Планируемый объём кофе: " + btn.getAttribute("data-pkg-coffee") + "\n\n" +
           "Прошу рассчитать аренду и подобрать кофемашину.";
       }
     });
