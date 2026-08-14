@@ -250,6 +250,7 @@
   }
 
   /* ---------- calculator ---------- */
+  var lastCalc = null;
   function calcRecommend(cups) {
     var rec;
     if (cups <= 10) rec = packages[0];
@@ -267,6 +268,7 @@
     var cups = parseInt(slider.value, 10);
     $("#cupsValue").textContent = cups;
     var r = calcRecommend(cups);
+    lastCalc = r;
     $("#calcResult").innerHTML =
       '<p class="calc__label">Рекомендуемый тариф</p>' +
       '<h4>' + r.name + '</h4>' +
@@ -274,7 +276,7 @@
       '<p class="calc__row">Объём кофе: <b>' + r.kg + ' кг/мес</b> (≈ ' + (r.kg * 100) + ' чашек)</p>' +
       '<p class="calc__row">Для <b>' + r.cups + ' чашек</b> в день при 22 рабочих днях</p>' +
       '<p class="calc__row">Себестоимость чашки ≈ <b>' + r.perCup + ' ₽</b></p>' +
-      '<a class="btn btn--accent calc__btn" href="#order">Выбрать этот тариф</a>';
+      '<a class="btn btn--accent calc__btn" href="#order" data-calc-order>Выбрать этот тариф</a>';
   }
 
   /* ---------- header / nav / mobile ---------- */
@@ -355,6 +357,25 @@
     }, true);
     var submitBtn = form.querySelector("button[type='submit']");
     if (submitBtn) submitBtn.addEventListener("click", handleOrderSubmit);
+    document.addEventListener("click", function (e) {
+      var btn = e.target && e.target.closest ? e.target.closest("[data-calc-order]") : null;
+      if (!btn || !lastCalc) return;
+      var subject = form.querySelector('[name="subject"]');
+      if (subject) {
+        [].forEach.call(subject.options, function (o) {
+          if (o.text && o.text.toLowerCase().indexOf("аренда") !== -1) subject.value = o.value;
+        });
+      }
+      var msg = form.querySelector('[name="message"]');
+      if (msg) {
+        msg.value =
+          "Рекомендуемый тариф: " + lastCalc.name + "\n" +
+          "Количество чашек в день: " + lastCalc.cups + "\n" +
+          "Планируемый объём кофе: " + lastCalc.kg + " кг/мес (≈ " + (lastCalc.kg * 100) + " чашек)\n" +
+          "Себестоимость чашки: ≈ " + lastCalc.perCup + " ₽\n\n" +
+          "Прошу рассчитать аренду и подобрать кофемашину.";
+      }
+    });
   }
 
   function sendByMail(f) {
