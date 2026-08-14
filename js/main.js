@@ -134,7 +134,8 @@
         '<div class="package__specs">' +
         p.spec.map(function (s) { return '<div class="package__spec"><span>' + s[0] + '</span><b>' + s[1] + '</b></div>'; }).join("") +
         '</div>' +
-        '<div class="package__price"><b>' + p.price + '</b><span>/ месяц</span><span class="package__cup">' + p.note + '</span></div>' +
+        '<div class="package__price"><b>' + p.price + '</b><span>/ месяц</span></div>' +
+        '<span class="package__cup">' + p.note + '</span>' +
         '<div class="package__perks">' +
         '<span class="package__perk">Установка 0 ₽</span>' +
         '<span class="package__perk">Сервис включён</span>' +
@@ -146,12 +147,7 @@
 
     var note = $("#packagesNote");
     if (note) note.innerHTML =
-      '<b class="packages__note-title">В каждый тариф уже включено</b>' +
-      '<div class="packages__chips">' +
-      ['Установка и наладка', 'Обучение и инструктаж', 'Доставка кофе по СПб', 'Ежемесячное сервисное обслуживание', 'Замена кофемашины при поломке', 'Персональный менеджер']
-        .map(function (t) { return '<span class="packages__chip">' + t + '</span>'; }).join("") +
-      '</div>' +
-      '<p class="packages__cond">Аренда — при закупке кофе от 2 кг в месяц. Себестоимость чашки — от 14 ₽.</p>';
+      '<b>Всё включено бесплатно:</b> установка и наладка · обучение и инструктаж · доставка кофе · ежемесячное сервисное обслуживание · замена кофемашины при поломке · персональный менеджер. <b>Аренда — при закупке кофе от 2 кг в месяц.</b>';
   }
 
   function itemPhoto(m, i) {
