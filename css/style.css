@@ -212,7 +212,6 @@ a:focus-visible { outline: 2px solid var(--accent-3); outline-offset: 2px; }
 .item { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform .2s ease, box-shadow .2s ease; }
 .item:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
 .item__img { background: linear-gradient(160deg, #F3E9DA, #E8D5BE); display: grid; place-items: center; min-height: 190px; padding: 20px; position: relative; overflow: hidden; }
-.item__img svg { width: 130px; height: 170px; filter: drop-shadow(0 14px 18px rgba(46,27,15,.22)); }
 .item__img-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 18px; z-index: 1; transition: transform .25s ease; }
 .item:hover .item__img-photo { transform: scale(1.06); }
 .item__body { padding: 20px; display: flex; flex-direction: column; flex: 1; }

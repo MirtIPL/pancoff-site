@@ -11,27 +11,6 @@
     return "";
   })();
 
-  var MACHINE_BG = [
-    ["#4E342E", "#241915", "#C08552"],
-    ["#5D4A3A", "#2A1B14", "#D9A05B"],
-    ["#3E3A35", "#1D1B18", "#B47B4F"],
-    ["#6B4527", "#3A240F", "#E0B98A"]
-  ];
-
-  function machineSvg(i) {
-    var c = MACHINE_BG[i % MACHINE_BG.length];
-    return '<svg viewBox="0 0 140 190" aria-hidden="true">' +
-      '<rect x="8" y="58" width="108" height="118" rx="22" fill="' + c[0] + '"/>' +
-      '<rect x="8" y="58" width="108" height="20" rx="10" fill="' + c[2] + '"/>' +
-      '<rect x="24" y="90" width="76" height="72" rx="8" fill="' + c[1] + '"/>' +
-      '<rect x="38" y="102" width="30" height="24" rx="5" fill="' + c[2] + '" opacity=".9"/>' +
-      '<rect x="38" y="136" width="48" height="6" rx="3" fill="' + c[2] + '" opacity=".55"/>' +
-      '<rect x="116" y="86" width="16" height="76" rx="7" fill="' + c[2] + '"/>' +
-      '<path d="M132 96c6 3 6 9 0 12-6-3-6-9 0-12z" fill="' + c[2] + '"/>' +
-      '<rect x="30" y="176" width="64" height="8" rx="4" fill="#241915" opacity=".55"/>' +
-      '</svg>';
-  }
-
   /* ---------- data ---------- */
   var advantages = [
     { icon: "💰", title: "От 14 ₽ за чашку", text: "Низкая себестоимость напитка при аренде — 3 кг кофе хватает на 300 чашек, машина предоставляется бесплатно." },
@@ -166,7 +145,6 @@
 
   function itemPhoto(m, i) {
     return '<div class="item__img">' +
-      '<div class="item__img-svg">' + machineSvg(i) + '</div>' +
       '<img class="item__img-photo" src="' + BASE + m.img + '" alt="' + m.brand + ' ' + m.name + '" loading="lazy">' +
       '</div>';
   }
