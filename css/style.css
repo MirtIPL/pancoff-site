@@ -162,7 +162,7 @@ a:focus-visible { outline: 2px solid var(--accent-3); outline-offset: 2px; }
 .hero__badge { display: inline-block; padding: 8px 16px; border-radius: 999px; background: rgba(192, 133, 82, .18); border: 1px solid rgba(192, 133, 82, .45); color: var(--accent-3); font-size: 13px; font-weight: 700; letter-spacing: .4px; margin-bottom: 20px; }
 .hero__title { font-size: clamp(34px, 5vw, 58px); font-weight: 800; letter-spacing: -.5px; }
 .hero__title span { color: var(--accent-3); }
-.hero__subtitle { margin: 20px 0 30px; font-size: 17px; color: #DCCBB6; max-width: 560px; }
+.hero__subtitle { margin: 20px 0 30px; font-size: 17px; color: #DCCBB6; max-width: 560px; hyphens: none; }
 .hero__subtitle strong { color: var(--white); }
 .hero__actions { display: flex; gap: 14px; flex-wrap: wrap; }
 .hero__stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 46px; }
