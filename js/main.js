@@ -344,8 +344,11 @@
   /* ---------- form ---------- */
   var form = $("#orderForm");
   var resetTimer = null;
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
+  var lastSend = 0;
+  function handleOrderSubmit() {
+    var now = Date.now();
+    if (now - lastSend < 900) return;
+    lastSend = now;
     if (resetTimer) clearTimeout(resetTimer);
     var inputs = form.querySelectorAll("[required]");
     var ok = true;
@@ -365,7 +368,16 @@
       form.reset();
       form.classList.remove("success");
     }, 5000);
-  });
+  }
+  if (form) {
+    form.addEventListener("submit", function (e) { e.preventDefault(); handleOrderSubmit(); });
+    document.addEventListener("submit", function (e) {
+      var f = e.target && e.target.closest ? e.target.closest("#orderForm") : null;
+      if (f) { e.preventDefault(); handleOrderSubmit(); }
+    }, true);
+    var submitBtn = form.querySelector("button[type='submit']");
+    if (submitBtn) submitBtn.addEventListener("click", handleOrderSubmit);
+  }
 
   function sendByMail(f) {
     var data = {};
@@ -379,6 +391,8 @@
       "\nОтправлено с сайта Pancoff";
     var a = document.createElement("a");
     a.href = "mailto:pancoff-spb@mail.ru?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    var mailLink = f.querySelector(".form__mailto");
+    if (mailLink) mailLink.setAttribute("href", a.href);
     a.style.display = "none";
     document.body.appendChild(a);
     a.click();

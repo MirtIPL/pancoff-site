@@ -299,6 +299,8 @@ a:focus-visible { outline: 2px solid var(--accent-3); outline-offset: 2px; }
 .form__done { display: none; text-align: center; padding: 20px 6px; }
 .form.success .form__done { display: block; }
 .form__done .big { font-size: 44px; margin-bottom: 10px; }
+.form__mailto { display: inline-block; margin-top: 12px; font-weight: 700; color: var(--accent); }
+.form__mailto:hover { text-decoration: underline; }
 
 /* footer */
 .footer { background: var(--coffee-900); color: #DCCBB6; padding: 56px 0 0; }
