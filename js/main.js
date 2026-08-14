@@ -21,40 +21,49 @@
 
   var packages = [
     {
-      tag: "Бюджетный",
+      tag: "Старт",
       hot: false,
       name: "Melitta Bistro",
-      machine: "Полуавтомат · стальной корпус",
-      spec: [["Напитки", "американо, эспрессо"], ["Чашек в день", "6–10"], ["Кофе", "от 3 кг/мес"]],
+      machine: "Для команды до 10 человек · полуавтомат",
+      spec: [["Напитки", "американо, эспрессо"], ["Чашек в день", "до 10"], ["Кофе", "от 2 до 3 кг/мес · 1 500 ₽/кг"]],
       price: "4 500 ₽",
-      note: "себестоимость чашки — 14 ₽"
+      cup: "≈ 32 ₽"
     },
     {
-      tag: "Для офиса",
+      tag: "Оптима",
       hot: true,
       name: "Melitta Ci",
-      machine: "Суперавтомат · автокапучинатор",
-      spec: [["Напитки", "эспрессо, капучино, латте"], ["Чашек в день", "6–10"], ["Кофе", "5 кг/мес · 1 500 ₽/кг"]],
+      machine: "Для команды 10–25 человек · автокапучинатор",
+      spec: [["Напитки", "эспрессо, капучино, латте"], ["Чашек в день", "10–25"], ["Кофе", "до 5 кг/мес · 1 450 ₽/кг"]],
       price: "7 500 ₽",
-      note: "себестоимость чашки — 15 ₽"
+      cup: "≈ 28 ₽"
     },
     {
-      tag: "Для среднего офиса",
+      tag: "Бизнес",
+      hot: false,
+      name: "Melitta Varianza CSP",
+      machine: "Для команды 25–40 человек · MilkPerfect",
+      spec: [["Напитки", "12+ рецептов"], ["Чашек в день", "25–40"], ["Кофе", "до 8 кг/мес · 1 400 ₽/кг"]],
+      price: "10 900 ₽",
+      cup: "≈ 24 ₽"
+    },
+    {
+      tag: "Премиум",
       hot: false,
       name: "Melitta Barista",
-      machine: "Суперавтомат · сенсорное управление",
-      spec: [["Напитки", "4+ напитка в одно нажатие"], ["Чашек в день", "30–45"], ["Кофе", "10 кг/мес · 1 400 ₽/кг"]],
+      machine: "Для офиса 40–60 человек · сенсорное управление",
+      spec: [["Напитки", "4+ напитка в одно нажатие"], ["Чашек в день", "40–60"], ["Кофе", "до 12 кг/мес · 1 350 ₽/кг"]],
       price: "14 000 ₽",
-      note: "себестоимость чашки — 14 ₽"
+      cup: "≈ 22 ₽"
     },
     {
-      tag: "Высокая проходимость",
+      tag: "Флагман",
       hot: false,
       name: "Jura Impressa Z9",
-      machine: "Швейцарский суперавтомат · TFT",
-      spec: [["Напитки", "эспрессо, латте, капучино"], ["Чашек в день", "50–70"], ["Кофе", "15 кг/мес"]],
+      machine: "Для офисов от 60 чашек в день · TFT",
+      spec: [["Напитки", "эспрессо, латте, капучино"], ["Чашек в день", "60+"], ["Кофе", "до 20 кг/мес · 1 300 ₽/кг"]],
       price: "23 250 ₽",
-      note: "себестоимость чашки — 15,5 ₽"
+      cup: "≈ 23 ₽"
     }
   ];
 
@@ -127,18 +136,22 @@
     var root = $("#packagesGrid"); if (!root) return;
     root.innerHTML = packages.map(function (p) {
       return '<div class="package reveal' + (p.hot ? " package--hot" : "") + '">' +
+        (p.hot ? '<span class="package__badge">Самый популярный</span>' : "") +
         '<span class="package__tag">' + p.tag + '</span>' +
         '<h3>' + p.name + '</h3>' +
         '<div class="package__machine">' + p.machine + '</div>' +
         p.spec.map(function (s) { return '<div class="package__spec"><span>' + s[0] + '</span><b>' + s[1] + '</b></div>'; }).join("") +
-        '<div class="package__price"><b>' + p.price + ' / месяц</b><span>' + p.note + '</span></div>' +
-        '<a class="btn btn--accent" href="#order" data-order data-tpl="package" data-subject="Аренда кофемашины" data-tariff="' + p.tag + '" data-machine="' + p.name + '" data-price="' + p.price + '" data-cups="' + p.spec[1][1] + '" data-coffee="' + p.spec[2][1] + '">Оставить заявку</a>' +
+        '<div class="package__price"><b>' + p.price + '</b><span>/ месяц</span></div>' +
+        '<div class="package__cup">Чашка с арендой <b>' + p.cup + '</b> · в кофейне 120–150 ₽</div>' +
+        '<p class="package__cond">Закупка кофе — от 2 кг/мес</p>' +
+        '<a class="btn btn--accent" href="#order" data-order data-tpl="package" data-subject="Аренда кофемашины" data-tariff="' + p.tag + '" data-machine="' + p.name + '" data-price="' + p.price + '" data-cups="' + p.spec[1][1] + '" data-coffee="' + p.spec[2][1] + '">Выбрать тариф</a>' +
         '</div>';
     }).join("");
 
     var note = $("#packagesNote");
     if (note) note.innerHTML =
-      '<b>Всё включено бесплатно:</b> установка и наладка · обучение и инструктаж · доставка кофе · ежемесячное сервисное обслуживание · замена кофемашины при поломке · персональный менеджер. <b>Аренда — при закупке кофе от 2 кг в месяц.</b>';
+      '<b>Экономьте до 5 раз:</b> чашка кофе у нас — 22–32 ₽ вместе с арендой, в кофейне — 120–150 ₽. ' +
+      'Установка, обучение, доставка кофе, ежемесячное сервисное обслуживание, замена техники при поломке и персональный менеджер — включены в любой тариф.';
   }
 
   function itemPhoto(m, i) {
@@ -253,11 +266,13 @@
     var rec;
     if (cups <= 10) rec = packages[0];
     else if (cups <= 25) rec = packages[1];
-    else if (cups <= 45) rec = packages[2];
-    else rec = packages[3];
-    var kg = Math.max(2, Math.ceil((cups * 22) / 300));
-    var price = kg <= 3 ? 4500 : (kg <= 5 ? 7500 : (kg <= 10 ? 14000 : 23250));
-    var perCup = Math.round(price / (cups * 22));
+    else if (cups <= 40) rec = packages[2];
+    else if (cups <= 60) rec = packages[3];
+    else rec = packages[4];
+    var kg = Math.max(2, Math.ceil((cups * 22) / 110));
+    var price = kg <= 3 ? 4500 : (kg <= 5 ? 7500 : (kg <= 8 ? 10900 : (kg <= 12 ? 14000 : 23250)));
+    var coffee = kg <= 3 ? 1500 : (kg <= 5 ? 1450 : (kg <= 8 ? 1400 : (kg <= 12 ? 1350 : 1300)));
+    var perCup = Math.round(price / (cups * 22) + coffee / 110);
     return { name: rec.name, tag: rec.tag, kg: kg, price: price, perCup: perCup, cups: cups };
   }
 
