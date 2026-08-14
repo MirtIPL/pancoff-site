@@ -97,13 +97,13 @@
             <a href="tel:+79210953341">8 (921) 095-33-41</a>
           </div>
           <p class="nav__meta">Санкт-Петербург, Краснопутиловская ул., д. 82 · ежедневно 10:00–18:00 · pancoff-spb@mail.ru</p>
-          <a href="#order" class="btn btn--accent nav__cta">Сделать заказ</a>
+          <a href="#order" data-order data-tpl="default" data-subject="Аренда кофемашины" class="btn btn--accent nav__cta">Сделать заказ</a>
         </div>
       </nav>
       <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
 
       <div class="header__actions">
-        <a href="#order" class="btn btn--accent btn--sm header__cta">Сделать заказ</a>
+        <a href="#order" data-order data-tpl="default" data-subject="Аренда кофемашины" class="btn btn--accent btn--sm header__cta">Сделать заказ</a>
         <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -251,7 +251,7 @@
           </p>
           <ul class="checklist" id="officeChecklist"><!-- JS --></ul>
           <div class="office__actions">
-            <a href="#order" class="btn btn--accent">Оставить заявку</a>
+            <a href="#order" data-order data-tpl="office" data-subject="Аренда кофемашины" class="btn btn--accent">Оставить заявку</a>
             <a href="arenda-v-ofis/" class="btn btn--ghost-dark">Подробнее об аренде в офис</a>
           </div>
         </div>
@@ -301,7 +301,7 @@
             <b>Быстрый вызов инженера</b>
             <p>По Санкт-Петербургу и Лен. области. При регулярной закупке кофе диагностика и ремонт бесплатны.</p>
             <a href="tel:+79117481093" class="btn btn--ghost-dark">8 (911) 748-10-93</a>
-            <a href="#order" class="btn btn--accent">Вызвать специалиста</a>
+            <a href="#order" data-order data-tpl="remont" data-subject="Ремонт / обслуживание" class="btn btn--accent">Вызвать специалиста</a>
           </div>
         </div>
       </div>
@@ -352,7 +352,7 @@
           </label>
           <label class="field">
             <span>Комментарий</span>
-            <textarea name="message" rows="3" placeholder="Например: 15 человек, нужно 20 чашек в день"></textarea>
+            <textarea name="message" rows="5" placeholder="Например: 15 человек, нужно 20 чашек в день"></textarea>
           </label>
           <button type="submit" class="btn btn--accent btn--block">Отправить заявку</button>
           <p class="form__note">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных.</p>
@@ -394,7 +394,7 @@
           <li><a href="prodazha/">Продажа кофемашин</a></li>
           <li><a href="coffee/">Кофе Verle</a></li>
           <li><a href="remont/">Сервис и ремонт</a></li>
-          <li><a href="#order">Заявка онлайн</a></li>
+          <li><a href="#order" data-order data-tpl="default" data-subject="Аренда кофемашины">Заявка онлайн</a></li>
         </ul>
       </div>
       <div class="footer__col">

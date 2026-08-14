@@ -134,7 +134,7 @@
         '<div class="package__machine">' + p.machine + '</div>' +
         p.spec.map(function (s) { return '<div class="package__spec"><span>' + s[0] + '</span><b>' + s[1] + '</b></div>'; }).join("") +
         '<div class="package__price"><b>' + p.price + ' / месяц</b><span>' + p.note + '</span></div>' +
-        '<a class="btn btn--accent" href="#order" data-package-order data-pkg-name="' + p.name + '" data-pkg-cups="' + p.spec[1][1] + '" data-pkg-coffee="' + p.spec[2][1] + '" data-pkg-price="' + p.price + '">Оставить заявку</a>' +
+        '<a class="btn btn--accent" href="#order" data-order data-tpl="package" data-subject="Аренда кофемашины" data-tariff="' + p.tag + '" data-machine="' + p.name + '" data-price="' + p.price + '" data-cups="' + p.spec[1][1] + '" data-coffee="' + p.spec[2][1] + '">Оставить заявку</a>' +
         '</div>';
     }).join("");
 
@@ -167,7 +167,7 @@
         '<div class="item__drinks">' + m.drinks.map(function (d) { return '<span class="chip">' + d + '</span>'; }).join("") + '</div>' +
         '<div class="item__foot">' +
         '<div class="item__price"><b>' + m.price + '</b><span>' + m.rent + '</span></div>' +
-        '<a class="btn btn--accent" href="#order">Заказать</a>' +
+          '<a class="btn btn--accent" href="#order" data-order data-tpl="rent" data-subject="Аренда кофемашины" data-machine="' + m.brand + ' ' + m.name + '" data-price="' + m.price + '">Заказать</a>' +
         '</div></div></div>';
     }).join("");
     bindPhotoFallback($("#catalogGrid"));
@@ -191,7 +191,7 @@
           '<p class="item__desc">Автоматическая кофемашина премиум-класса. Гарантия производителя, доставка по СПб и ЛО.</p>' +
           '<div class="item__foot">' +
           '<div class="item__price"><b>Узнать цену</b><span>звоните — подскажем</span></div>' +
-          '<a class="btn btn--accent" href="#order">Заказать</a>' +
+        '<a class="btn btn--accent" href="#order" data-order data-tpl="buy" data-subject="Покупка кофемашины" data-machine="' + name + ' ' + m[0] + '" data-price="по запросу">Заказать</a>' +
           '</div></div></div>';
       }).join("");
     }
@@ -260,7 +260,7 @@
     var kg = Math.max(2, Math.ceil((cups * 22) / 300));
     var price = kg <= 3 ? 4500 : (kg <= 5 ? 7500 : (kg <= 10 ? 14000 : 23250));
     var perCup = Math.round(price / (cups * 22));
-    return { name: rec.name, kg: kg, price: price, perCup: perCup, cups: cups };
+    return { name: rec.name, tag: rec.tag, kg: kg, price: price, perCup: perCup, cups: cups };
   }
 
   function renderCalc() {
@@ -271,12 +271,12 @@
     lastCalc = r;
     $("#calcResult").innerHTML =
       '<p class="calc__label">Рекомендуемый тариф</p>' +
-      '<h4>' + r.name + '</h4>' +
+      '<h4>' + r.tag + '</h4>' +
       '<div class="calc__price">≈ ' + r.price.toLocaleString("ru-RU") + ' ₽<span> / мес</span></div>' +
       '<p class="calc__row">Объём кофе: <b>' + r.kg + ' кг/мес</b> (≈ ' + (r.kg * 100) + ' чашек)</p>' +
       '<p class="calc__row">Для <b>' + r.cups + ' чашек</b> в день при 22 рабочих днях</p>' +
       '<p class="calc__row">Себестоимость чашки ≈ <b>' + r.perCup + ' ₽</b></p>' +
-      '<a class="btn btn--accent calc__btn" href="#order" data-calc-order>Выбрать этот тариф</a>';
+      '<a class="btn btn--accent calc__btn" href="#order" data-calc-order data-subject="Аренда кофемашины">Выбрать этот тариф</a>';
   }
 
   /* ---------- header / nav / mobile ---------- */
@@ -349,6 +349,75 @@
       form.classList.remove("success");
     }, 5000);
   }
+  var ORDER_TPL = {
+    calc: function (d) {
+      return "Рекомендуемый тариф: " + d.tariff + " · " + d.machine + "\n" +
+        "Количество чашек в день: " + d.cups + "\n" +
+        "Планируемый объём кофе: " + d.coffee + "\n" +
+        "Себестоимость чашки: ≈ " + d.perCup + " ₽\n\n" +
+        "Прошу рассчитать аренду и подобрать кофемашину.";
+    },
+    package: function (d) {
+      return "Тариф: " + d.tariff + " · " + d.machine + ", " + d.price + "/мес\n" +
+        (d.cups ? "Количество чашек в день: " + d.cups + "\n" : "") +
+        (d.coffee ? "Планируемый объём кофе: " + d.coffee + "\n" : "") +
+        "\nПрошу рассчитать аренду и подобрать кофемашину.";
+    },
+    rent: function (d) {
+      return (d.machine ? "Хочу арендовать кофемашину: " + d.machine + "\n" : "Хочу арендовать кофемашину.\n") +
+        (d.price ? "Стоимость аренды: " + d.price + "\n" : "") +
+        "\nПрошу рассчитать условия аренды.";
+    },
+    buy: function (d) {
+      return (d.machine ? "Хочу купить кофемашину: " + d.machine + "\n" : "Хочу купить кофемашину.\n") +
+        (d.price ? "Цена: " + d.price + "\n" : "") +
+        "\nПрошу уточнить наличие и стоимость доставки.";
+    },
+    office: function () {
+      return "Интересует аренда кофемашины в офис в СПб.\n\nПрошу рассчитать стоимость и подобрать кофемашину.";
+    },
+    remont: function () {
+      return "Нужен ремонт или обслуживание кофемашины.\n\nПрошу связаться и уточнить детали.";
+    },
+    coffee: function () {
+      return "Хочу заказать кофе в зёрнах.\n\nПрошу связаться для подбора сорта и расчёта.";
+    },
+    "default": function () {
+      return "Прошу рассчитать условия и связаться со мной.";
+    }
+  };
+
+  function applyOrderPreset(btn) {
+    var msg = form.querySelector('[name="message"]');
+    if (!msg) return;
+    var d = {
+      tariff: btn.getAttribute("data-tariff") || "",
+      machine: btn.getAttribute("data-machine") || "",
+      price: btn.getAttribute("data-price") || "",
+      cups: btn.getAttribute("data-cups") || "",
+      coffee: btn.getAttribute("data-coffee") || ""
+    };
+    var text;
+    if (btn.hasAttribute("data-calc-order") && lastCalc) {
+      d.tariff = lastCalc.tag;
+      d.machine = lastCalc.name;
+      d.cups = lastCalc.cups;
+      d.coffee = lastCalc.kg + " кг/мес (≈ " + (lastCalc.kg * 100) + " чашек)";
+      d.perCup = lastCalc.perCup;
+      text = ORDER_TPL.calc(d);
+    } else {
+      text = (ORDER_TPL[btn.getAttribute("data-tpl")] || ORDER_TPL["default"])(d);
+    }
+    var subject = form.querySelector('[name="subject"]');
+    if (subject) {
+      var s = btn.getAttribute("data-subject") || "";
+      [].forEach.call(subject.options, function (o) {
+        if (s && o.text && o.text.toLowerCase().indexOf(s.toLowerCase()) !== -1) subject.value = o.value;
+      });
+    }
+    msg.value = text;
+  }
+
   if (form) {
     form.addEventListener("submit", function (e) { e.preventDefault(); handleOrderSubmit(); });
     document.addEventListener("submit", function (e) {
@@ -358,31 +427,9 @@
     var submitBtn = form.querySelector("button[type='submit']");
     if (submitBtn) submitBtn.addEventListener("click", handleOrderSubmit);
     document.addEventListener("click", function (e) {
-      var btn = e.target && e.target.closest ? e.target.closest("[data-calc-order], [data-package-order]") : null;
+      var btn = e.target && e.target.closest ? e.target.closest("[data-order], [data-calc-order]") : null;
       if (!btn) return;
-      var subject = form.querySelector('[name="subject"]');
-      if (subject) {
-        [].forEach.call(subject.options, function (o) {
-          if (o.text && o.text.toLowerCase().indexOf("аренда") !== -1) subject.value = o.value;
-        });
-      }
-      var msg = form.querySelector('[name="message"]');
-      if (!msg) return;
-      if (btn.hasAttribute("data-calc-order")) {
-        if (!lastCalc) return;
-        msg.value =
-          "Рекомендуемый тариф: " + lastCalc.name + "\n" +
-          "Количество чашек в день: " + lastCalc.cups + "\n" +
-          "Планируемый объём кофе: " + lastCalc.kg + " кг/мес (≈ " + (lastCalc.kg * 100) + " чашек)\n" +
-          "Себестоимость чашки: ≈ " + lastCalc.perCup + " ₽\n\n" +
-          "Прошу рассчитать аренду и подобрать кофемашину.";
-      } else {
-        msg.value =
-          "Тариф: " + btn.getAttribute("data-pkg-name") + " · " + btn.getAttribute("data-pkg-price") + "/мес\n" +
-          "Количество чашек в день: " + btn.getAttribute("data-pkg-cups") + "\n" +
-          "Планируемый объём кофе: " + btn.getAttribute("data-pkg-coffee") + "\n\n" +
-          "Прошу рассчитать аренду и подобрать кофемашину.";
-      }
+      applyOrderPreset(btn);
     });
   }
 
