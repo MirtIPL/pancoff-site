@@ -11,6 +11,8 @@
     return "";
   })();
 
+  var FORM_EMAIL = "wowowa3903@playboot.com"; // куда доставляются заявки (FormSubmit)
+
   /* ---------- data ---------- */
   var advantages = [
     { icon: "💰", title: "От 14 ₽ за чашку", text: "Низкая себестоимость напитка при аренде — 3 кг кофе хватает на 300 чашек, машина предоставляется бесплатно." },
@@ -354,13 +356,40 @@
       toast("Пожалуйста, заполните имя и телефон корректно.");
       return;
     }
-    sendByMail(form);
-    form.classList.add("success");
-    toast("Спасибо! В почтовой программе откроется письмо с заявкой.");
-    resetTimer = setTimeout(function () {
-      form.reset();
-      form.classList.remove("success");
-    }, 5000);
+    var done = function (viaMail) {
+      form.classList.add("success");
+      toast(viaMail ? "Спасибо! В почтовой программе откроется письмо с заявкой." : "Спасибо! Заявка отправлена на почту.");
+      resetTimer = setTimeout(function () {
+        form.reset();
+        form.classList.remove("success");
+      }, 5000);
+    };
+    sendViaFormSubmit(form).then(function (ok) {
+      done(!ok);
+    }).catch(function () {
+      done(true);
+    });
+  }
+
+  function sendViaFormSubmit(f) {
+    var data = {};
+    [].forEach.call(f.querySelectorAll("[name]"), function (inp) { data[inp.name] = inp.value.trim(); });
+    var payload = {
+      name: data.name || "—",
+      _subject: "Заявка с сайта Pancoff — " + (data.subject || "консультация"),
+      _template: "table",
+      _captcha: "false",
+      subject: data.subject || "—",
+      phone: data.phone || "—",
+      message: data.message || "—"
+    };
+    return fetch("https://formsubmit.co/ajax/" + FORM_EMAIL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(payload)
+    }).then(function (r) { return r.json(); }).then(function (j) {
+      return j.success === "true" || j.success === true;
+    });
   }
   var ORDER_TPL = {
     calc: function (d) {
